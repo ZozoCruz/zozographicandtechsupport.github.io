@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f3eb">
+  <meta name="description" content="Creative design and friendly tech support for small businesses, makers, and everyday people.">
+  <title>Zozo Studio — Design that clicks. Tech that works.</title>
+  <style>
+    :root {
+      --paper: #f6f3eb;
+      --ink: #17211d;
+      --muted: #65716a;
+      --green: #c9ef74;
+      --orange: #ff7654;
+      --line: rgba(23, 33, 29, .15);
+      --serif: Georgia, 'Times New Roman', serif;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea, select { font: inherit; }
+    .wrap { width: min(1160px, calc(100% - 48px)); margin-inline: auto; }
+    .nav { height: 82px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); }
+    .brand { display: inline-flex; gap: 10px; align-items: center; font-weight: 850; letter-spacing: -.05em; font-size: 20px; }
+    .brand-mark { width: 31px; height: 31px; border-radius: 50% 50% 50% 8px; background: var(--orange); display: grid; place-items: center; font-size: 15px; transform: rotate(-8deg); }
+    .brand-mark span { transform: rotate(8deg); }
+    .nav-links { display: flex; align-items: center; gap: 32px; font-size: 13px; font-weight: 650; }
+    .nav-links a:not(.nav-cta):hover { opacity: .6; }
+    .nav-cta, .button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; border-radius: 99px; padding: 14px 21px; background: var(--ink); color: white; font-size: 13px; font-weight: 700; transition: transform .2s, background .2s; }
+    .nav-cta:hover, .button:hover { transform: translateY(-2px); background: #34443b; }
+    .menu-button { display: none; border: 0; background: none; font-size: 24px; }
+    .hero { display: grid; grid-template-columns: 1.08fr .92fr; gap: 56px; align-items: center; padding: 82px 0 94px; }
+    .eyebrow { text-transform: uppercase; letter-spacing: .16em; font-weight: 800; font-size: 10px; color: var(--muted); display: flex; gap: 10px; align-items: center; }
+    .eyebrow:before { content: ''; width: 24px; height: 2px; background: var(--orange); }
+    h1 { font-size: clamp(54px, 7.5vw, 94px); line-height: .96; letter-spacing: -.075em; margin: 25px 0 24px; font-weight: 780; }
+    h1 em { font-family: var(--serif); font-weight: 500; }
+    .hero-copy { max-width: 460px; font-size: 16px; line-height: 1.7; color: var(--muted); }
+    .hero-actions { display: flex; align-items: center; gap: 22px; margin-top: 32px; }
+    .text-link { font-size: 13px; font-weight: 750; border-bottom: 1px solid var(--ink); padding-bottom: 4px; }
+    .hero-art { min-height: 450px; position: relative; display: grid; place-items: center; }
+    .art-orbit { width: min(390px, 90%); aspect-ratio: 1; background: var(--green); border-radius: 48% 52% 43% 57% / 54% 43% 57% 46%; position: relative; transform: rotate(-8deg); }
+    .art-orbit:before { content: ''; position: absolute; inset: 12%; border: 1px solid rgba(23,33,29,.28); border-radius: 50%; }
+    .art-orbit:after { content: ''; position: absolute; width: 66px; height: 66px; background: var(--orange); border-radius: 50%; right: 6%; top: 17%; box-shadow: 0 0 0 11px rgba(255,118,84,.2); }
+    .art-card { position: absolute; width: 230px; height: 285px; background: var(--paper); border: 1px solid var(--ink); border-radius: 8px; padding: 18px; transform: rotate(8deg); box-shadow: 12px 15px 0 rgba(23,33,29,.11); display: flex; flex-direction: column; justify-content: space-between; }
+    .art-card-top { display: flex; justify-content: space-between; font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; }
+    .art-sun { width: 113px; height: 113px; margin: auto; border-radius: 50%; background: var(--orange); position: relative; }
+    .art-sun:after { content: ''; position: absolute; width: 94px; height: 58px; background: var(--green); left: 44px; bottom: -3px; border-radius: 50% 50% 4px 4px; border: 1px solid var(--ink); }
+    .art-card-bottom { font-family: var(--serif); font-size: 22px; line-height: 1; }
+    .art-sticker { position: absolute; right: 1%; bottom: 11%; background: var(--ink); color: white; width: 92px; height: 92px; display: grid; place-items: center; text-align: center; border-radius: 50%; font-size: 10px; line-height: 1.3; font-weight: 700; transform: rotate(11deg); }
+    .ticker { background: var(--ink); color: var(--paper); overflow: hidden; white-space: nowrap; padding: 17px 0; }
+    .ticker-track { display: inline-flex; gap: 24px; align-items: center; animation: drift 26s linear infinite; font-size: 12px; text-transform: uppercase; letter-spacing: .13em; font-weight: 750; }
+    .ticker span { color: var(--green); font-size: 17px; }
+    @keyframes drift { to { transform: translateX(-50%); } }
+    section { scroll-margin-top: 30px; }
+    .section { padding: 100px 0; }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 35px; margin-bottom: 43px; }
+    .section-head h2, .about h2, .contact h2 { font-size: clamp(40px, 5vw, 62px); letter-spacing: -.065em; line-height: 1; margin: 15px 0 0; }
+    .section-head p { max-width: 330px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.65; }
+    .service-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .service-card { min-height: 280px; border: 1px solid var(--line); border-radius: 12px; padding: 29px; display: flex; flex-direction: column; justify-content: space-between; transition: transform .2s; }
+    .service-card:hover { transform: translateY(-4px); }
+    .service-card.design { background: #e8e1d3; }
+    .service-card.support { background: #e6edda; }
+    .service-icon { width: 47px; height: 47px; border: 1px solid var(--ink); border-radius: 50%; display: grid; place-items: center; font-size: 21px; }
+    .service-card h3 { font-size: 27px; letter-spacing: -.04em; margin: 25px 0 9px; }
+    .service-card p { color: #566158; font-size: 14px; line-height: 1.65; max-width: 390px; margin: 0; }
+    .service-arrow { align-self: end; font-size: 22px; }
+    .about { background: var(--green); padding: 75px 0; }
+    .about-inner { display: grid; grid-template-columns: .75fr 1.25fr; gap: 80px; align-items: start; }
+    .about-badge { border: 1px solid var(--ink); width: 138px; height: 138px; border-radius: 50%; display: grid; place-items: center; text-align: center; font-family: var(--serif); font-size: 20px; transform: rotate(-8deg); }
+    .about h2 { max-width: 590px; }
+    .about-copy { max-width: 580px; color: #44513d; line-height: 1.8; margin: 24px 0 0; font-size: 15px; }
+    .values { display: flex; gap: 28px; margin-top: 28px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
+    .values span:before { content: '✳'; margin-right: 8px; }
+    .contact { padding: 100px 0; }
+    .contact-panel { background: var(--ink); color: var(--paper); border-radius: 16px; padding: 54px; display: grid; grid-template-columns: 1.2fr .8fr; gap: 50px; align-items: end; }
+    .contact .eyebrow { color: #bdc9bd; }
+    .contact h2 { max-width: 580px; }
+    .contact h2 em { font-family: var(--serif); color: var(--green); font-weight: 500; }
+    .contact-details { color: #bec7c0; font-size: 14px; line-height: 1.7; }
+    .contact-details p { margin: 0 0 18px; }
+    .contact-details .button { background: var(--green); color: var(--ink); }
+    .contact-details .button:hover { background: #d7f69a; }
+    footer { border-top: 1px solid var(--line); padding: 24px 0 32px; display: flex; justify-content: space-between; gap: 20px; color: var(--muted); font-size: 11px; }
+    footer strong { color: var(--ink); }
+    @media (max-width: 760px) {
+      .wrap { width: min(100% - 36px, 560px); }
+      .nav { height: 70px; }
+      .menu-button { display: block; }
+      .nav-links { display: none; position: absolute; z-index: 3; left: 0; right: 0; top: 70px; background: var(--paper); padding: 24px; border-bottom: 1px solid var(--line); flex-direction: column; align-items: stretch; gap: 22px; }
+      .nav-links.open { display: flex; }
+      .nav-cta { text-align: center; }
+      .hero { grid-template-columns: 1fr; gap: 10px; padding: 65px 0 55px; }
+      h1 { font-size: clamp(58px, 15vw, 82px); }
+      .hero-art { min-height: 370px; }
+      .art-orbit { width: 300px; }
+      .art-card { width: 195px; height: 245px; }
+      .art-sticker { right: 4%; bottom: 6%; }
+      .section { padding: 70px 0; }
+      .section-head { align-items: start; flex-direction: column; gap: 16px; }
+      .service-grid { grid-template-columns: 1fr; }
+      .service-card { min-height: 250px; }
+      .about { padding: 60px 0; }
+      .about-inner { grid-template-columns: 1fr; gap: 35px; }
+      .about-badge { width: 100px; height: 100px; font-size: 16px; }
+      .values { flex-wrap: wrap; gap: 16px; }
+      .contact { padding: 70px 0; }
+      .contact-panel { grid-template-columns: 1fr; padding: 32px 25px; gap: 30px; }
+      footer { flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <nav class="nav" aria-label="Main navigation">
+      <a class="brand" href="#home" aria-label="Zozo Studio home"><span class="brand-mark"><span>z</span></span> zozo studio</a>
+      <button class="menu-button" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+      <div class="nav-links">
+        <a href="#services">What I do</a>
+        <a href="#about">About</a>
+        <a class="nav-cta" href="#contact">Let's talk <span aria-hidden="true">↗</span></a>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <section class="hero wrap" id="home">
+      <div>
+        <div class="eyebrow">Creative studio · Friendly tech help</div>
+        <h1>Design that <em>clicks.</em><br>Tech that works.</h1>
+        <p class="hero-copy">Thoughtful graphic design and down-to-earth tech support for small businesses, creative people, and anyone who could use a hand.</p>
+        <div class="hero-actions"><a class="button" href="#services">Explore services <span aria-hidden="true">↘</span></a><a class="text-link" href="#about">A little about me</a></div>
+      </div>
+      <div class="hero-art" aria-label="Playful abstract design illustration" role="img">
+        <div class="art-orbit"></div>
+        <div class="art-card"><div class="art-card-top"><span>Zozo Studio</span><span>✳ 01</span></div><div class="art-sun"></div><div class="art-card-bottom">Ideas made<br>to stand out.</div></div>
+        <div class="art-sticker">GOOD IDEAS<br>MEET GOOD<br>TECH ✳</div>
+      </div>
+    </section>
+    <div class="ticker" aria-hidden="true"><div class="ticker-track">BRANDING <span>✳</span> PRINT & DIGITAL <span>✳</span> TECH SUPPORT <span>✳</span> WEBSITES <span>✳</span> BRANDING <span>✳</span> PRINT & DIGITAL <span>✳</span> TECH SUPPORT <span>✳</span> WEBSITES <span>✳</span></div></div>
+    <section class="section wrap" id="services">
+      <div class="section-head"><div><div class="eyebrow">A good place to start</div><h2>How I can help</h2></div><p>One creative partner for your visuals and your everyday tech headaches. Pick a service or let's figure it out together.</p></div>
+      <div class="service-grid">
+        <a class="service-card design" href="#contact"><div><div class="service-icon" aria-hidden="true">✳</div><h3>Graphic design</h3><p>Logos, brand identity, flyers, social graphics, and the little details that make your business feel like you.</p></div><span class="service-arrow" aria-hidden="true">↗</span></a>
+        <a class="service-card support" href="#contact"><div><div class="service-icon" aria-hidden="true">⌘</div><h3>Tech support</h3><p>Patient help with computers, devices, software, setup, troubleshooting, and getting your tech back on track.</p></div><span class="service-arrow" aria-hidden="true">↗</span></a>
+        <a class="service-card support" href="#contact"><div><div class="service-icon" aria-hidden="true">◎</div><h3>Websites & digital</h3><p>A clean, friendly online home for your work, plus help making your digital tools easier to use.</p></div><span class="service-arrow" aria-hidden="true">↗</span></a>
+        <a class="service-card design" href="#contact"><div><div class="service-icon" aria-hidden="true">✎</div><h3>Creative help</h3><p>Have an idea but aren't sure where to start? Let's shape it into something useful, polished, and personal.</p></div><span class="service-arrow" aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+    <section class="about" id="about">
+      <div class="wrap about-inner"><div class="about-badge">Small studio.<br>Big care.</div><div><div class="eyebrow">The person behind the pixels</div><h2>Good work starts with listening.</h2><p class="about-copy">Hi, I'm Zozo. I bring creative thinking and practical problem-solving together to make design and technology feel less intimidating. Whether you need a fresh visual identity or a patient hand with a stubborn device, you'll get thoughtful service without the jargon.</p><div class="values"><span>Personal & friendly</span><span>Clear communication</span><span>Made for you</span></div></div></div>
+    </section>
+    <section class="contact" id="contact"><div class="wrap contact-panel"><div><div class="eyebrow">Your next step</div><h2>Have a project or a tech <em>mystery?</em></h2></div><div class="contact-details"><p>Tell me what you're working on or what's not working. We'll find a good way forward.</p><a class="button" href="mailto:hello@zozostudio.com?subject=Hello%20Zozo%20Studio">Get in touch <span aria-hidden="true">↗</span></a></div></div></section>
+  </main>
+  <footer class="wrap"><span><strong>zozo studio</strong> · Design that clicks. Tech that works.</span><span>© <span id="year"></span> Zozo Studio. Made with care.</span></footer>
+  <script>
+    const menuButton = document.querySelector('.menu-button');
+    const navLinks = document.querySelector('.nav-links');
+    menuButton.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuButton.setAttribute('aria-expanded', String(isOpen));
+      menuButton.textContent = isOpen ? '×' : '☰';
+    });
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      menuButton.setAttribute('aria-expanded', 'false');
+      menuButton.textContent = '☰';
+    }));
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
